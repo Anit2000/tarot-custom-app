@@ -32,13 +32,21 @@ const storeSession = async (session) => {
  */
 const loadSession = async (id) => {
   const sessionResult = await SessionModel.findOne({ id });
+
   if (sessionResult === null) {
     return undefined;
   }
   if (sessionResult.content.length > 0) {
     const sessionObj = JSON.parse(cryption.decrypt(sessionResult.content));
-    const returnSession = new Session(sessionObj);
-    return returnSession;
+
+    //Convert date strings to usable dates
+    if (sessionObj?.expires) {
+      sessionObj.expires = new Date(sessionObj.expires);
+    }
+    if (sessionObj?.refreshTokenExpires) {
+      sessionObj.refreshTokenExpires = new Date(sessionObj.refreshTokenExpires);
+    }
+    return new Session(sessionObj);
   }
   return undefined;
 };
