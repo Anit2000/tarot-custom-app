@@ -1,6 +1,6 @@
 import "@shopify/shopify-api/adapters/node";
-import "dotenv/config";
 import cors from "cors";
+import "dotenv/config";
 import Express from "express";
 import fs from "fs";
 import mongoose from "mongoose";
@@ -14,6 +14,7 @@ import {
   customerRedact,
   shopRedact,
 } from "./controllers/gdpr.js";
+import eventHandler from "./events/_index.js";
 import csp from "./middleware/csp.js";
 import isInitialLoad from "./middleware/isInitialLoad.js";
 import verifyCheckout from "./middleware/verifyCheckout.js";
@@ -45,6 +46,11 @@ const createServer = async (root = process.cwd()) => {
     "/api/webhooks/*webhookTopic",
     Express.text({ type: "*/*" }),
     webhookHandler
+  );
+  app.post(
+    "/api/webhooks/*eventTopic",
+    Express.text({ type: "*/*" }),
+    eventHandler
   );
 
   app.use(Express.json());

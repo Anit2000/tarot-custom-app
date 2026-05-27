@@ -5,6 +5,7 @@ import path from "path";
 import setupCheck from "../utils/setupCheck.js";
 import webhookWriter from "./webhookWriter.js";
 import declarativeWriter from "./declarativeWriter.js";
+import eventWriter from "./eventWriter.js";
 
 /** @typedef {import("../_developer/types/toml.js").AppConfig} Config */
 
@@ -62,6 +63,7 @@ try {
 
   // Writers
   webhookWriter(config);
+  eventWriter(config);
   declarativeWriter(config);
 
   // GDPR URLs

@@ -20,6 +20,7 @@
  * @property {AccessConfig} access - The access scopes required by the application.
  * @property {AuthConfig} auth - Authentication configuration details.
  * @property {WebhooksConfig} webhooks - Configuration for webhooks.
+ * @property {EventsConfig} events - Configuration for events.
  * @property {AppProxyConfig} app_proxy - Configuration for application proxy.
  * @property {POSConfig} pos - Point of Sale configuration.
  * @property {PreferencesConfig} preferences - App preferences configuration.
@@ -52,6 +53,23 @@
  * @typedef {Object} WebhooksConfig
  * @property {('2024-07' | '2024-10' | '2025-01' | '2025-04')} api_version - The API version to be used for webhooks.
  * @property {PrivacyComplianceConfig} privacy_compliance - Configuration for webhooks.
+ */
+
+/**
+ * Event configuration
+ * @typedef {Object} EventsConfig
+ * @property {"unstable"} api_version - The API version to be used for events.
+ * @property {EventSubscription[]} subscription - Array of event subscriptions.
+ *
+ * Event subscription
+ * @typedef {Object} EventSubscription
+ * @property {('Product' | 'Customer')} topic - Event topic.
+ * @property {Array<('create' | 'update' | 'delete')>} actions - Event actions.
+ * @property {string} uri - The URI to receive events.
+ * @property {string} handle - Human readable event handle.
+ * @property {string[]} [triggers] - Optional event triggers.
+ * @property {string} [query] - Optional GraphQL query.
+ * @property {string} [query_filter] - Optional filter for the GraphQL query.
  */
 
 /**

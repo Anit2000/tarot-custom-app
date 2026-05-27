@@ -37,44 +37,38 @@ shopify = {
         callback: appUninstallHandler,
       },
     ],
+    /**
+     * @type {Array<{
+     *   topic: import("@/_developer/types/eventTopics.js").EventTopics["topic"],
+     *   actions: import("@/_developer/types/eventTopics.js").EventTopics["actions"],
+     *   uri: string,
+     *   handle: string,
+     *   callback: Function,
+     *   triggers?: string[],
+     *   query?: string,
+     *   query_filter?: string
+     * }>}
+     */
+    events: [
+      // {
+      //   topic: "Product",
+      //   actions: ["create", "update", "delete"],
+      //   uri: "/api/events/product",
+      //   handle: "this-is-my-handle",
+      //   callback: productEventHandler,
+      //   triggers: [""],
+      //   query: /* GraphQL */ `
+      //     query your_query {
+
+      //     } `,
+      //   query_filter: "",
+      // },
+    ],
 
     /**
      * @type {import("../_developer/types/declarative.js").DeclarativeMetafieldDefinition[]}
      */
-    metafields: [
-      {
-        owner_type: "product",
-        key: "key_name",
-        name: "Last synced",
-        description: "This is a description",
-        type: "number_integer",
-        access: {
-          admin: "merchant_read_write",
-          customer_account: "read_write",
-        },
-        capabilities: {
-          admin_filterable: true,
-          unique_values: false,
-        },
-        validations: [
-          {
-            //Docs: https://shopify.dev/docs/apps/build/metafields/list-of-validation-options
-            name: "max",
-            value: "10",
-          },
-          {
-            name: "min",
-            value: "1",
-          },
-        ],
-      },
-    ],
-    /**
-     * @type {import("../_developer/types/declarative.js").DeclarativeMetaobjectDefinition[]}
-     */
-    metaobjects: [
-      //Support is coming soon.
-    ],
+    metafields: [],
   },
 };
 
