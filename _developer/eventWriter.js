@@ -80,7 +80,7 @@ async function writeToApi() {
 
     // Start with the comment and shopify import
     let newFileContent =
-      topComment + 'import shopify from "@/utils/shopify.js";\n';
+      topComment + 'import shopify from "../../utils/shopify.js";\n';
 
     // Add new imports from event handlers
     if (eventImports) {

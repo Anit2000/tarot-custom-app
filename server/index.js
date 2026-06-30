@@ -25,6 +25,7 @@ import proxyRouter from "./routes/app_proxy/index.js";
 import checkoutRoutes from "./routes/checkout/index.js";
 import userRoutes from "./routes/index.js";
 import webhookHandler from "./webhooks/_index.js";
+import razorpayWebhookHandler from "./modules/razorpay/routes/webhook.js";
 
 setupCheck(); // Run a check to ensure everything is setup properly
 
@@ -77,6 +78,7 @@ const createServer = async (root = process.cwd()) => {
   app.use(csp);
   app.use(isInitialLoad);
   //Routes to make server calls
+  app.use("/api/webhook", razorpayWebhookHandler);
   app.use("/api/apps", verifyRequest, userRoutes); //Verify user route requests
   app.use("/api/proxy_route", verifyProxy, proxyRouter); //MARK:- App Proxy routes
   app.use(
